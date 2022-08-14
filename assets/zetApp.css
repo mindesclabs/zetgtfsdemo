@@ -1,0 +1,222 @@
+body {
+    background-color: #333333;
+    margin:0;
+    font-family: 'Open Sans';
+    color: #cacaca;
+}
+
+/* ************************************ */
+/* scrollbar styling: */
+
+/* Works on Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #202020 #414141;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #414141;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #202020;
+  border-radius: 20px;
+  border: 1px solid #414141;
+}
+
+/* ************************************ */
+
+
+#dash_app{
+  max-width: 1920px;
+}
+
+#app_container {
+  margin: 0 auto;
+  display: grid;
+  gap: 5px;
+}
+
+#header {
+  background-color: #202020;
+  display:flex;
+  justify-content: space-between;
+  height: 60px;
+  color: #cacaca;
+  align-items: center;
+}
+
+#site_title {
+  float: left;
+  margin-right: 15px;
+  margin-left: 15px;
+  font-size: small; 
+}
+
+#mdlabs_logo {
+  float: right;
+  font-family: "Courier New"; 
+	font-size: large; 
+	font-style: normal; 
+	font-variant: normal; 
+	font-weight: 700;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+#mdlabs_logo a:link, a:visited {
+  color: #cacaca;
+  text-decoration: none;
+}
+
+#mdlabs_logo a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+#map_container {
+  min-height: calc(75vh - 100px);
+}
+
+#info_container {
+  min-height: 25vh;
+  /*overflow-y: auto;*/
+}
+
+#footer {
+  background-color: #202020;
+  height: 35px;
+  color: #cacaca;
+  font-size: x-small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#footer pre {
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+@media (min-width: 600px) {
+
+  #app_container {
+    margin: 0 auto;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 3fr minmax(275px, auto);
+  }
+
+  #map_container {
+    height: calc(100vh - 95px);
+  }
+  
+  #info_container {
+    height: calc(100vh - 95px);
+    overflow-y: auto;
+  }
+
+  #site_title {
+    font-size: large; 
+  }
+
+  #mdlabs_logo {
+    font-size: x-large; 
+  }
+
+}
+
+#dd .Select-clear-zone {
+  display: table-header-group;
+}
+
+#dd .Select-clear {
+  font-size: 25px;
+
+}
+#dd .Select-clear:after {
+  font-size: 15px;
+  content: "Clear all";
+  display: block;
+}
+
+#dd .Select-clear-zone:hover {
+  color: #ffffff;
+  background-color: #202020;
+}
+
+#dd .Select-arrow-zone {
+  display: none;
+}
+
+#dd .Select-control {
+  background-color: #333333;
+  border: none;
+  padding: 5px 5px 50px 5px;  
+}
+
+#dd .Select-control:hover {
+  box-shadow: none;
+}
+
+#dd .Select-value-label, .Select-placeholder {
+  font-size: small;
+}
+
+#dd .Select-input {
+  caret-color: #cacaca;
+  color: #cacaca;
+  font-size: small;
+}
+
+#dd .Select-menu-outer {
+  background-color: #333333;
+  color: #cacaca;
+  font-size: small;
+  border: 1px solid #414141;
+}
+
+#dd .Select-value {
+  color: #cacaca;
+  border: 1px solid rgba(32, 32, 32, .24);
+  background-color: rgba(32, 32, 32,.08);
+  display: block;
+}
+
+#dd .Select-value-icon {
+  border-right: inherit;
+}
+
+
+ #dd .Select--multi .Select-value-icon:focus, .Select--multi .Select-value-icon:hover {
+  background-color: inherit;
+  color: #ffffff;
+}
+
+#dd .is-focused:not(.is-open)>.Select-control {
+  border: none;
+  box-shadow: none;
+}
+
+.footer_block{
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+input {
+  color: inherit;
+}
+
+.zet_tooltip_info {
+  width: 100%;
+  text-align: left;
+}
