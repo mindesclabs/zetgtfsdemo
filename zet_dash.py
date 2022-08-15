@@ -1,5 +1,5 @@
 import dash_leaflet as dl
-from dash import Dash, html, dcc, Output, Input, dash_table
+from dash import Dash, html, dcc, Output, Input
 from dash_extensions.javascript import assign
 import urllib.request
 import json
@@ -14,9 +14,8 @@ external_stylesheets = [
 ]
 
 
-with urllib.request.urlopen('https://app.box.com/index.php?rm=box_download_shared_file&shared_name=yd7cx7zt8eiu46d8b9wu9x35m3q7hi3n&file_id=f_996278820986') as url_route_ids:
+with urllib.request.urlopen('https://app.box.com/index.php?rm=box_download_shared_file&shared_name=3hz9d3wq3pz2ti6ma5ytd30wx7d35215&file_id=f_996804901951') as url_route_ids:
     dd_defaults = json.loads(url_route_ids.read().decode())
-
 
 # Get icons and popup info:
 draw_zet_icon = assign("""
@@ -80,8 +79,14 @@ zet_popup_info = assign("""
 """)
 
 app = Dash(__name__, external_stylesheets=external_stylesheets,
+           meta_tags=[
+               {'name': 'viewport', 'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'},
+               {'name': 'HandheldFriendly', 'content': 'true'}
+           ],
            update_title=None)
 
+app.title = 'ZET GTFS Demo'
+server = app.server
 
 app.layout = html.Div([
 
@@ -99,9 +104,9 @@ app.layout = html.Div([
                              maxZoom=20,
                              attribution=attribution),
 
-                dl.GeoJSON(url="https://app.box.com/index.php?rm=box_download_shared_file&shared_name=r3t9egzok8iche5celsk0y818gt87smw&file_id=f_996258889860", id="bus_networks",
+                dl.GeoJSON(id="bus_networks",
                            options=dict(style=dict(color="#4682B4", opacity=0.5, weight=2))),
-                dl.GeoJSON(url="https://app.box.com/index.php?rm=box_download_shared_file&shared_name=y6uer80zo949e1neg0rdr05hy5xejl1p&file_id=f_996248629232", id="tram_networks",
+                dl.GeoJSON(id="tram_networks",
                            options=dict(style=dict(color="#FFD700", opacity=0.5, weight=2))),
                 dl.GeoJSON(id="stops",
                            options=dict(pointToLayer=draw_zet_icon,
@@ -119,6 +124,8 @@ app.layout = html.Div([
             dcc.Dropdown(id="dd", value=dd_defaults,
                  clearable=True, multi=True, placeholder='Plese search or select routes...'),
         ], id='info_container'),
+
+        html.Div(id='dummy_init_callback_cors')  # because of cors......
     ], id='app_container'),
 
     html.Div([
@@ -157,6 +164,19 @@ def update_positions(n):
         dd_options = json.loads(url_routes.read())
 
     return data, dd_options
+
+
+@app.callback([Output('bus_networks', 'data'), Output('tram_networks', 'data')],
+              Input('dummy_init_callback_cors', 'children'))
+def get_init_data(n):
+
+    with urllib.request.urlopen('https://app.box.com/index.php?rm=box_download_shared_file&shared_name=r3t9egzok8iche5celsk0y818gt87smw&file_id=f_996258889860') as url:
+        bus_networks_data = json.loads(url.read().decode())
+
+    with urllib.request.urlopen('https://app.box.com/index.php?rm=box_download_shared_file&shared_name=y6uer80zo949e1neg0rdr05hy5xejl1p&file_id=f_996248629232') as url:
+        tram_networks_data = json.loads(url.read().decode())
+
+    return bus_networks_data, tram_networks_data
 
 
 if __name__ == '__main__':
