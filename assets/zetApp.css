@@ -116,11 +116,11 @@ body {
   }
 
   #map_container {
-    height: calc(100vh - 95px);
+    height: calc(100vh - 100px);
   }
   
   #info_container {
-    height: calc(100vh - 95px);
+    height: calc(100vh - 100px);
     overflow-y: auto;
   }
 
